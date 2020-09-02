@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#20200805 km4ack
+
+sudo shutdown -h now
