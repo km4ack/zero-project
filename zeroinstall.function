@@ -23,13 +23,12 @@ sleep 2
 
 #Update the system
 sudo apt-get -y update && sudo apt-get -y upgrade
-#Install git
-sudo apt-get install -y git
+
 
 ##########################
 #	HotSpot
 ##########################
-
+echo "Installing Hotspot"
 sudo bash $MYPATH/autohotspot $HSPASS
 
 
@@ -77,9 +76,11 @@ sed -i 's/"enable_http": false,/"enable_http": true,/' $FIG
 ##########################
 #	EES
 ##########################
+echo "Installing EES"
+sudo apt-get install -y php7.0
 cd $TEMP
 git clone https://github.com/km4ack/EES-LITE.git
-sudo cp -r ~/Downloads/EES-LITE/* /var/www/html/
+sudo cp -r $TEMP/EES-LITE/* /var/www/html/
 rm -rf $TEMP/EES-LITE
 cd /var/www/html
 sudo chmod +x /var/www/html/firstrun
@@ -103,6 +104,7 @@ EOF
 ##########################
 # Install Custom Scripts
 ##########################
+echo "Installing custom scripts"
 cd $MYPATH/scripts
 chmod +x *
 sudo mv * /usr/local/bin/
