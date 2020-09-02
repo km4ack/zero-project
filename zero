@@ -68,10 +68,48 @@ fi
 }
 GRID
 
+DB(){
+clear;echo;echo
+cat <<EOF
+The following information is needed
+to create the database that will be
+used by the PHPBB forum software.
+
+EOF
+#get database user name & password
+read -p "Please enter a user name for your database " newUser
+read -p "Please enter a password for your database " newDbPassword
+
+#verify info
+echo "User name - "$newUser
+echo "Password - "$newDbPassword
+read -p "Is this correct y/n " ANS
+if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+DB
+fi
+#give user a chance to copy down needed info
+clear;echo;echo
+echo "Database name - forum"
+echo "Database user name- "$newUser
+echo "Database password - "$newDbPassword
+echo "hostname - localhost"
+
+cat <<EOF
+The database has been created. Write
+down the above information. You will
+need it later to complete setup of the
+forum software.
+Please press any key to continue
+EOF
+read -n 1 -s -r -p ""
+}
+DB
 echo "CALL=$CALL" > $CONFIG
 echo "HSPASS=$HSPASS" >> $CONFIG
 echo "WLPASS=$WLPASS" >> $CONFIG
 echo "GRID=$GRID" >> $CONFIG
+echo "newUser=$newUser" >> $CONFIG
+echo "newDbPassword=$newDbPassword" >> $CONFIG
 
 
 
