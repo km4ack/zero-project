@@ -1,0 +1,55 @@
+#!/bin/bash
+
+#Script to install PHPBB forums
+#20200305 km4ack
+
+MYPATH=$HOME/zero-project
+CONFIG=$MYPATH/config
+
+source $CONFIG
+
+#RUN SCRIPT AS ROOT
+WHO=$(whoami)
+if [ $WHO = 'root' ]
+then
+echo
+else
+echo "script must be run as root"
+exit 0
+fi
+
+#install needed apps
+apt-get install -y php7.3 mariadb-server phpmyadmin
+
+#download PHPBB, setup dir, and mod files
+mkdir -p /temp
+cd /temp
+DBDL=$(curl -s https://www.phpbb.com/downloads/ | grep .zip | head -1 | awk '{ print $2 }' | sed 's/href="//' | sed 's/">Download//')
+wget $DBDL
+VER=$(echo $DBDL | sed 's/.*phpBB//')
+DL="phpBB"$VER
+unzip $DL
+mkdir -p /var/www/html/forum
+cd /temp/phpBB3
+cp -r * /var/www/html/forum
+rm -rf /temp
+cd /var/www/html/forum
+chmod 777 config.php
+chmod 777 files
+chmod 777 cache
+chmod 777 store
+
+#set database name and host
+newDb='forum'
+host=localhost
+
+commands="CREATE DATABASE \`${newDb}\`;CREATE USER '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT USAGE ON *.* TO '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT ALL privileges ON \`${newDb}\`.*
+TO '${newUser}'@'${host}';FLUSH PRIVILEGES;"
+#write results to mariadb
+echo "${commands}" | /usr/bin/mysql -u root
+
+
+
+
+
+
