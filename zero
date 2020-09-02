@@ -1,0 +1,81 @@
+#!/bin/bash
+
+MYPATH=$HOME/zero-project
+CONFIG=$MYPATH/config
+
+##########################
+#	User input
+##########################
+CALLSIGN(){
+clear;echo;echo
+read -p "What is you call sign? " CALL
+#convert call to upper case
+CALL=${CALL^^}
+echo "You entered $CALL"
+read -p "Is this correct? y/n " ANS
+if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+CALLSIGN
+fi
+}
+CALLSIGN
+
+HOTSPOT(){
+clear;echo;echo
+echo "----------------------------------------------------------------"
+echo "Password should contain no spaces, contain only letters/numbers,"
+echo "and be between 8-63 characters long"
+echo "----------------------------------------------------------------"
+read -p "Password to use with hotspot? " HSPASS
+echo "You entered $HSPASS"
+read -p "Is this correct? y/n " ANS
+
+#Check password length
+COUNT=${#HSPASS}
+if [ $COUNT -lt 8 ]
+then
+echo "Password must be at least 8 characters"
+read -n 1 -s -r -p "Press any key to continue"
+HOTSPOT
+fi
+
+if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+HOTSPOT
+fi
+}
+HOTSPOT
+
+
+WINLINK(){
+clear;echo;echo
+read -p "Winlink password? " WLPASS
+echo "You entered $WLPASS"
+read -p "Is this correct? y/n " ANS
+if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+WINLINK
+fi
+}
+WINLINK
+
+GRID(){
+clear;echo;echo
+read -p "What is your 6 character grid square? " GRID
+GRID=${GRID^^}
+echo "You entered $GRID"
+read -p "Is this correct? y/n " ANS
+if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+GRID
+fi
+}
+GRID
+
+echo "CALL=$CALL" > $CONFIG
+echo "HSPASS=$HSPASS" >> $CONFIG
+echo "WLPASS=$WLPASS" >> $CONFIG
+echo "GRID=$GRID" >> $CONFIG
+
+
+
+bash $MYPATH/zeroinstall.function
+
+
+
