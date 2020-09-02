@@ -28,14 +28,19 @@ sudo apt-get -y update && sudo apt-get -y upgrade
 ##########################
 #	HotSpot
 ##########################
+echo "##########################"
 echo "Installing Hotspot"
+echo "##########################"
 sudo bash $MYPATH/autohotspot $HSPASS
+echo "*/5 * * * * sudo /usr/bin/autohotspotN >/dev/null 2>&1" >> $MYPATH/TEMPCRON
 
 
 ##########################
 #	HotSpot Tools
 ##########################
+echo "##########################"
 echo "Installing Hotspot Tools"
+echo "##########################"
 cd
 git clone https://github.com/km4ack/hotspot-tools.git
 cd hotspot-tools/
@@ -45,7 +50,9 @@ rm setup
 ##########################
 #	AX25
 ##########################
+echo "##########################"
 echo "Installing AX25"
+echo "##########################"
 sudo apt-get install -y ax25-tools
 echo "wl2k $CALL 1200 255 7 Winlink" | sudo tee -a /etc/ax25/axports
 sudo apt-get install -y ax25-apps
@@ -53,7 +60,9 @@ sudo apt-get install -y ax25-apps
 ##########################
 #	Pat Winlink
 ##########################
+echo "##########################"
 echo "Installing Pat Winlink"
+echo "##########################"
 cd $TEMP
 wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armhf.deb
 sudo dpkg -i pat_0.9.0_linux_armhf.deb
@@ -77,7 +86,9 @@ sed -i 's/"enable_http": false,/"enable_http": true,/' $FIG
 ##########################
 #	EES
 ##########################
+echo "##########################"
 echo "Installing EES"
+echo "##########################"
 sudo apt-get install -y apache2 php7.3
 cd $TEMP
 git clone https://github.com/km4ack/EES-LITE.git
@@ -104,7 +115,9 @@ EOF
 ##########################
 # Install Custom Scripts
 ##########################
+echo "##########################"
 echo "Installing custom scripts"
+echo "##########################"
 cd $MYPATH/scripts
 chmod +x *
 sudo mv * /usr/local/bin/
