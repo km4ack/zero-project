@@ -63,6 +63,7 @@ sudo systemctl start pat@$WHO
 sudo systemctl enable pat@$WHO
 
 FIG=$HOME/.wl2k/config.json
+$PORT=5050
 #set callsign
 sed -i "s/\"mycall\": \".*\",/\"mycall\": \"$CALL\",/" $FIG
 #set password
