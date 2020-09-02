@@ -124,6 +124,11 @@ chmod +x *
 sudo mv * /usr/local/bin/
 rm -rf $MYPATH/scripts
 
+#install custom PHP pages
+sudo mv $MYPATH/php/control.php /var/www/html/
+sudo mkdir -p /var/www/html/control
+sudo mv $MYPATH/php/* /var/www/html/control/
+
 #install cron
 crontab $MYPATH/TEMPCRON
 
