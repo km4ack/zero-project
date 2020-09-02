@@ -46,6 +46,7 @@ git clone https://github.com/km4ack/hotspot-tools.git
 cd hotspot-tools/
 chmod +x disable enable hotspot-menu hotspotname knowssid manage-ip wificonnect
 rm setup
+sudo ln -sf ~/hotspot-tools/hotspot-menu /usr/local/bin/hstools
 
 ##########################
 #	AX25
