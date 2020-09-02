@@ -8,7 +8,7 @@ source $CONFIG
 WHO=$(whoami)
 
 echo "Begin Install Scripts Now"
-exit 0
+
 
 FINISH(){
 rm -rf $TEMP
@@ -112,6 +112,8 @@ rm -rf $MYPATH/scripts
 
 #install cron
 crontab $MYPATH/TEMPCRON
+
+echo;echo;echo "ALL DONE! Please reboot"
 
 
 
