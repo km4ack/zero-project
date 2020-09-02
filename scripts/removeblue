@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "stopping the connection"
+sudo killall kissattach
+sudo rfcomm release /dev/rfcomm0
+echo "disconnected from the mobilinkd TNC"
