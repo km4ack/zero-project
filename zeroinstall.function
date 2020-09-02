@@ -9,11 +9,11 @@ WHO=$(whoami)
 
 echo "Begin Install Scripts Now"
 
-
 FINISH(){
 rm -rf $TEMP
 rm $CONFIG
 rm $MYPATH/autohotspot
+rm $MYPATH/phpbb-install
 }
 trap FINISH EXIT
 
@@ -128,6 +128,15 @@ rm -rf $MYPATH/scripts
 sudo mv $MYPATH/php/control.php /var/www/html/
 sudo mkdir -p /var/www/html/control
 sudo mv $MYPATH/php/* /var/www/html/control/
+echo;echo;echo "Done installing custom scripts"
+
+##########################
+# phpBB Forum Install
+##########################
+echo "##########################"
+echo "Installing phpBB Forum"
+echo "##########################"
+sudo bash $MYPATH/phpbb-install
 
 #install cron
 crontab $MYPATH/TEMPCRON
