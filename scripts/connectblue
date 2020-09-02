@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#20200803 KM4ACK
+
+WHO=$(whoami)
+
+#stop any running services
+sudo killall kissattach > /dev/null 2>&1
+sudo rfcomm release /dev/rfcomm0 > /dev/null 2>&1
+
+CUR=$(cat /var/www/html/control/config.php | grep TNC | awk '{print $3}' | sed "s/'//g" | sed 's/;//')
+
+#search for TNC
+echo "scanning for TNC"
+MAC=$(hcitool scan | grep Mobilinkd | awk '{print $1}')
+if [ -z "$MAC" ]; then
+echo "TNC Not Found"
+exit 1
+else
+echo "Connecting"
+sudo rfcomm bind /dev/rfcomm0 $MAC
+sleep 1
+sudo kissattach /dev/rfcomm0 wl2k
+RF=$(ls /dev | grep rfcomm)
+KA=$(pidof kissattach)
+	if [ -z "$RF" ] || [ -z "$KA" ]; then
+	echo "Not Connected"
+	else
+	echo "Connected"
+	fi
+fi
+
+echo $NEW
+
+#restart pat server
+sudo systemctl restart pat@$WHO
