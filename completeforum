@@ -1,0 +1,2 @@
+mv /var/www/html/$newDb/install /var/www/html/$newDb/install.org
+chmod 644 /var/www/html/$newDb/config.php
