@@ -109,7 +109,8 @@ chmod +x *
 sudo mv * /usr/local/bin/
 rm -rf $MYPATH/scripts
 
-
+#install cron
+crontab $MYPATH/TEMPCRON
 
 
 
