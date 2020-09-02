@@ -77,7 +77,7 @@ sed -i 's/"enable_http": false,/"enable_http": true,/' $FIG
 #	EES
 ##########################
 echo "Installing EES"
-sudo apt-get install -y apache2 php7.0
+sudo apt-get install -y apache2 php7.3
 cd $TEMP
 git clone https://github.com/km4ack/EES-LITE.git
 sudo cp -r $TEMP/EES-LITE/* /var/www/html/
@@ -87,7 +87,6 @@ sudo chmod +x /var/www/html/firstrun
 sudo /var/www/html/./firstrun
 sudo sed -i "s/N0CALL/$CALL/" /var/www/html/config.php
 sudo sed -i 's/REMINDER\ FOR\ OPERATOR\ TO\ DO\ SOMETHING/ENABLE\ AUTO\ POST\ REPLY\ IN\ CRON/' /var/www/html/config.php
-cd
 sudo mv index.html index.html.org
 
 cat <<EOF >> $MYPATH/TEMPCRON
