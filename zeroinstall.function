@@ -77,7 +77,7 @@ sed -i 's/"enable_http": false,/"enable_http": true,/' $FIG
 #	EES
 ##########################
 echo "Installing EES"
-sudo apt-get install -y php7.0
+sudo apt-get install -y apache2 php7.0
 cd $TEMP
 git clone https://github.com/km4ack/EES-LITE.git
 sudo cp -r $TEMP/EES-LITE/* /var/www/html/
