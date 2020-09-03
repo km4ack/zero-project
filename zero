@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MYPATH=$HOME/zero-project
-CONFIG=$MYPATH/config
+CONFIG=/tmp/config
 
 ##########################
 #	User input
