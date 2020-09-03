@@ -71,8 +71,6 @@ wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armh
 sudo dpkg -i pat_0.9.0_linux_armhf.deb
 pat http &
 sudo killall pat
-sudo systemctl start pat@$WHO
-sudo systemctl enable pat@$WHO
 
 FIG=$HOME/.wl2k/config.json
 PORT=5050
@@ -86,6 +84,14 @@ sed -i "s/\"locator\": \".*\",/\"locator\": \"$GRID\",/" $FIG
 sed -i "s/\"http_addr\": \".*\",/\"http_addr\": \"0.0.0.0:$PORT\",/" $FIG
 #Enable GPS
 sed -i 's/"enable_http": false,/"enable_http": true,/' $FIG
+
+sudo systemctl start pat@$WHO
+sudo systemctl enable pat@$WHO
+
+#download packet list
+touch $HOME/packet.txt
+sudo chmod 644 $HOME/packet.txt
+pat rmslist -s --mode packet --force-download > $HOME/packet.txt
 ##########################
 #	EES
 ##########################
