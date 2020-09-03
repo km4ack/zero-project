@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MYPATH=$HOME/zero-project
-CONFIG=$MYPATH/config
+CONFIG=/tmp/config
 TEMP=$HOME/zerotemp
 mkdir -p $TEMP
 source $CONFIG
