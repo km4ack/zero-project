@@ -74,5 +74,9 @@ echo '<p style="color:green">Mobilinkd Connected';
 <form action="/control/shutdown.php">
     <input type="submit" value="Shutdown Pi">
 </form>
+<br>
+<form action="/control/packet.php">
+    <input type="submit" value="Packet List">
+</form>
 </body>
 </html>
