@@ -132,6 +132,23 @@ sudo mkdir -p /var/www/html/control
 sudo mv $MYPATH/php/* /var/www/html/control/
 echo;echo;echo "Done installing custom scripts"
 
+echo "##########################"
+echo "Mod sudoers for PHP access"
+echo "##########################"
+cat <<EOF > $MYPATH/tempsudo
+#give www-data access to needed commands to control mobilinkd TNC
+www-data ALL = (root) NOPASSWD: /usr/bin/pkill kissattach
+www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm release /dev/rfcomm0
+www-data ALL = (root) NOPASSWD: /usr/sbin/kissattach /dev/rfcomm0 wl2k
+www-data ALL = (root) NOPASSWD: /usr/bin/systemctl restart pat@pi
+www-data ALL = (root) NOPASSWD: /usr/bin/hcitool
+www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm bind /dev/rfcomm0 *
+www-data ALL = (root) NOPASSWD: /sbin/shutdown *
+EOF
+
+sudo chown root:root $MYPATH/tempsudo
+sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi
+
 ##########################
 # phpBB Forum Install
 ##########################
