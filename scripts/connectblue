@@ -5,10 +5,8 @@
 WHO=$(whoami)
 
 #stop any running services
-sudo killall kissattach > /dev/null 2>&1
-sudo rfcomm release /dev/rfcomm0 > /dev/null 2>&1
-
-CUR=$(cat /var/www/html/control/config.php | grep TNC | awk '{print $3}' | sed "s/'//g" | sed 's/;//')
+sudo /usr/bin/pkill kissattach
+sudo /usr/bin/rfcomm release /dev/rfcomm0
 
 #search for TNC
 echo "scanning for TNC"
@@ -30,7 +28,5 @@ KA=$(pidof kissattach)
 	fi
 fi
 
-echo $NEW
-
 #restart pat server
-sudo systemctl restart pat@$WHO
+sudo systemctl restart pat@pi
