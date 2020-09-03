@@ -137,7 +137,7 @@ rm -rf $MYPATH/scripts
 sudo mv $MYPATH/php/control.php /var/www/html/
 sudo mkdir -p /var/www/html/control
 sudo mv $MYPATH/php/* /var/www/html/control/
-echo;echo;echo "Done installing custom scripts"
+echo;echo;echo "Custom scripts installed"
 
 echo "##########################"
 echo "Mod sudoers for PHP access"
@@ -147,7 +147,7 @@ cat <<EOF > $MYPATH/tempsudo
 www-data ALL = (root) NOPASSWD: /usr/bin/pkill kissattach
 www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm release /dev/rfcomm0
 www-data ALL = (root) NOPASSWD: /usr/sbin/kissattach /dev/rfcomm0 wl2k
-www-data ALL = (root) NOPASSWD: /usr/bin/systemctl restart pat@pi
+www-data ALL = (root) NOPASSWD: /bin/systemctl restart pat@pi
 www-data ALL = (root) NOPASSWD: /usr/bin/hcitool
 www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm bind /dev/rfcomm0 *
 www-data ALL = (root) NOPASSWD: /sbin/shutdown *
@@ -155,6 +155,7 @@ EOF
 
 sudo chown root:root $MYPATH/tempsudo
 sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi
+echo "sudoers mod complete"
 
 ##########################
 # phpBB Forum Install
