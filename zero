@@ -95,8 +95,8 @@ echo "Database password - "$newDbPassword
 echo "hostname - localhost"
 
 cat <<EOF
-The database has been created. Write
-down the above information. You will
+This information will be use to create the 
+database. Write down this information. You will
 need it later to complete setup of the
 forum software.
 Please press any key to continue
