@@ -3,10 +3,9 @@
 #Script to install PHPBB forums
 #20200305 km4ack
 
-MYPATH=$HOME/zero-project
-CONFIG=$MYPATH/config
 
-source $CONFIG
+
+source /tmp/config
 
 #RUN SCRIPT AS ROOT
 WHO=$(whoami)
