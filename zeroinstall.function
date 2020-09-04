@@ -92,7 +92,7 @@ sudo systemctl enable pat@$WHO
 touch $HOME/packet.txt
 sudo chmod 644 $HOME/packet.txt
 pat rmslist -s --mode packet --force-download > $HOME/packet.txt
-echo "*/60 * * * * /usr/bin/pat rmslist -s --mode packet --force-download > $HOME/packet.txt" >> TEMPCRON
+echo "*/60 * * * * /usr/bin/pat rmslist -s --mode packet --force-download > $HOME/packet.txt" >> $MYPATH/TEMPCRON
 ##########################
 #	EES
 ##########################
