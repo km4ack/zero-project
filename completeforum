@@ -1,9 +1,6 @@
-MYPATH=$HOME/zero-project
-CONFIG=$MYPATH/config
 
-source $CONFIG
 
-mv /var/www/html/$newDb/install /var/www/html/$newDb/install.org
+mv /var/www/html/forum/install /var/www/html/forum/install.org
 chmod 644 /var/www/html/$newDb/config.php
 
-rm $MYPATH/completeforum
+rm /home/pi/zero-project/completeforum
