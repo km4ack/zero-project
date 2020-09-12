@@ -68,8 +68,8 @@ echo "##########################"
 echo "Installing Pat Winlink"
 echo "##########################"
 cd $TEMP
-wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armhf.deb
-sudo dpkg -i pat_0.9.0_linux_armhf.deb
+wget https://github.com/la5nta/pat/releases/download/v0.10.0/pat_0.10.0_linux_armhf.deb
+sudo dpkg -i pat_0.10.0_linux_armhf.deb
 pat http &
 sudo killall pat
 
