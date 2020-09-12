@@ -16,6 +16,7 @@ rm $MYPATH/autohotspot
 rm $MYPATH/phpbb-install
 rm $MYPATH/TEMPCRON
 rm -rf $MYPATH/php
+rm -rf $MYPATH/misc
 }
 trap FINISH EXIT
 
@@ -155,7 +156,7 @@ EOF
 
 sudo chown root:root $MYPATH/tempsudo
 sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi
-echo "sudoers mod complete"
+echo;echo "sudoers mod complete"
 
 ##########################
 # phpBB Forum Install
@@ -164,6 +165,25 @@ echo "##########################"
 echo "Installing phpBB Forum"
 echo "##########################"
 sudo bash $MYPATH/phpbb-install
+
+##########################
+# APRX Install
+##########################
+echo "##########################"
+echo "Installing APRX"
+echo "##########################"
+
+sudo apt-get install -y aprx
+echo;echo "Backing up aprx.conf file"
+sudo cp /etc/aprx.conf /etc/aprx.conf.org
+echo;echo "Modifying aprx.conf file with your settings"
+sed -i "s/4023.25N/$LAT/" $HOME/zero-project/misc/aprx.conf
+sed -i "s/07227.19W/$LON/" $HOME/zero-project/misc/aprx.conf
+sed -i "s/N0CALL/$CALL/g" $HOME/zero-project/misc/aprx.conf
+sed -i "s/00000/$CALLPASS/" $HOME/zero-project/misc/aprx.conf
+
+echo;echo "Installing new aprx.conf file"
+sudo cp $HOME/zero-project/misc/aprx.conf /etc/aprx.conf
 
 #install cron
 crontab $MYPATH/TEMPCRON
