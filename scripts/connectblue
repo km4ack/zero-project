@@ -11,12 +11,19 @@ sudo /usr/bin/rfcomm release /dev/rfcomm0
 #search for TNC
 echo "scanning for TNC"
 MAC=$(hcitool scan | grep Mobilinkd | awk '{print $1}')
+TNC=$(hcitool scan | grep TNC2
+if [ -z "$TNC" ]; then
+CONNECT="$MAC 6"
+else
+CONNECT="$MAC"
+fi
+
 if [ -z "$MAC" ]; then
 echo "TNC Not Found"
 exit 1
 else
 echo "Connecting"
-sudo rfcomm bind /dev/rfcomm0 $MAC
+sudo rfcomm bind /dev/rfcomm0 $CONNECT
 sleep 1
 sudo kissattach /dev/rfcomm0 wl2k
 RF=$(ls /dev | grep rfcomm)
