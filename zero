@@ -133,7 +133,7 @@ echo "LON=$LON" >> $CONFIG
 echo "CALLPASS=$CALLPASS" >> $CONFIG
 
 
-#bash $MYPATH/zeroinstall.function
+bash $MYPATH/zeroinstall.function
 
 
 
