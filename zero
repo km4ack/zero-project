@@ -104,16 +104,36 @@ EOF
 read -n 1 -s -r -p ""
 }
 DB
+
+APRS(){
+clear;echo;echo
+echo "#############################################"
+echo "This section pertains to your APRS digi setup"
+echo "#############################################"
+read -p "What is your call pass? " CALLPASS
+read -p "What is your latitude setting? " LAT
+read -p "What is your longitude setting? " LON
+echo "Call Pass = $CALLPASS"
+echo "LATITUDE = $LAT"
+echo "LONGITUDE = $LON"
+read -p "Is this correct y/n " ANS
+if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+APRS
+fi
+}
+APRS
 echo "CALL=$CALL" > $CONFIG
 echo "HSPASS=$HSPASS" >> $CONFIG
 echo "WLPASS=$WLPASS" >> $CONFIG
 echo "GRID=$GRID" >> $CONFIG
 echo "newUser=$newUser" >> $CONFIG
 echo "newDbPassword=$newDbPassword" >> $CONFIG
+echo "LAT=$LAT" >> $CONFIG
+echo "LON=$LON" >> $CONFIG
+echo "CALLPASS=$CALLPASS" >> $CONFIG
 
 
-
-bash $MYPATH/zeroinstall.function
+#bash $MYPATH/zeroinstall.function
 
 
 
