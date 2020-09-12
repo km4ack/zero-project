@@ -174,7 +174,7 @@ echo "Installing APRX"
 echo "##########################"
 
 sudo apt-get install -y aprx
-echo;echo "Backing up aprx.conf file"
+echo;echo "Backing up original aprx.conf file"
 sudo cp /etc/aprx.conf /etc/aprx.conf.org
 echo;echo "Modifying aprx.conf file with your settings"
 sed -i "s/4023.25N/$LAT/" $HOME/zero-project/misc/aprx.conf
