@@ -198,7 +198,7 @@ read -p "Is this correct? y/n " ANS
 	fi
 }
 CALLSIGN
-
+clear
 read -p "Install Hot Spot? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "HS" >> $APPS
@@ -227,12 +227,12 @@ read -p "Install Hot Spot? y/n " ANS
 	}
 	HOTSPOT
 	fi
-
+clear
 read -p "Install Hot Spot Tools? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "HST" >> $APPS
 	fi
-
+clear
 read -p "Install Pat Winlink? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "PAT" >> $APPS
@@ -260,21 +260,21 @@ read -p "Install Pat Winlink? y/n " ANS
 	}
 	GRID
 	fi
-
+clear
 read -p "Install Emergency Email Server? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "EES" >> $APPS
 	fi
 
 
-
+clear
 read -p "Install AX25? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "AX25" >> $APPS
 	fi
 
 
-
+clear
 read -p "Install PHPBB Forum Software? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "PHPBB" >> $APPS
@@ -315,7 +315,7 @@ EOF
 	DB
 	fi
 
-
+clear
 read -p "Install APRS Digipeater? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "APRX" >> $APPS
