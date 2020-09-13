@@ -2,6 +2,51 @@
 
 MYPATH=$HOME/zero-project
 CONFIG=/tmp/config
+APPS=$MYPATH/apps.conf
+
+FINISH(){
+rm -rf $TEMP
+rm $CONFIG
+rm $MYPATH/autohotspot
+rm $MYPATH/phpbb-install
+rm $MYPATH/TEMPCRON
+rm -rf $MYPATH/php
+rm -rf $MYPATH/misc
+rm $APPS
+}
+trap FINISH EXIT
+
+#remove apps.conf if exist
+if [ -f "$APPS" ]; then
+rm $APPS
+fi
+
+touch $APPS
+
+
+clear;echo;echo
+cat <<EOF
+Apps to be Installed:
+-------------------------
+Hot Spot, Hotspot Tools,
+Pat Winlink, Custom PHP,
+Emergency Email Server,
+AX25, phpBB Forums, APRX
+-------------------------
+EOF
+echo
+read -p "Would you like to install everything? y/n " ANS
+if [ $ANS = 'y' ] || [ $ANS = 'Y' ]; then
+
+#Write apps to install to conf file
+echo "HS" >> $APPS
+echo "HST" >> $APPS
+echo "PAT" >> $APPS
+echo "EES" >> $APPS
+echo "AX25" >> $APPS
+echo "PHPBB" >> $APPS
+echo "APRX" >> $APPS
+echo "MYSCRIPTS" >> $APPS
 
 ##########################
 #	User input
@@ -13,9 +58,9 @@ read -p "What is you call sign? " CALL
 CALL=${CALL^^}
 echo "You entered $CALL"
 read -p "Is this correct? y/n " ANS
-if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-CALLSIGN
-fi
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	CALLSIGN
+	fi
 }
 CALLSIGN
 
@@ -31,28 +76,29 @@ read -p "Is this correct? y/n " ANS
 
 #Check password length
 COUNT=${#HSPASS}
-if [ $COUNT -lt 8 ]
-then
-echo "Password must be at least 8 characters"
-read -n 1 -s -r -p "Press any key to continue"
-HOTSPOT
-fi
+	if [ $COUNT -lt 8 ]
+	then
+	echo "Password must be at least 8 characters"
+	read -n 1 -s -r -p "Press any key to continue"
+	HOTSPOT
+	fi
 
-if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-HOTSPOT
-fi
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	HOTSPOT
+	fi
 }
 HOTSPOT
 
 
 WINLINK(){
 clear;echo;echo
+echo "Password is case sensitive"
 read -p "Winlink password? " WLPASS
 echo "You entered $WLPASS"
 read -p "Is this correct? y/n " ANS
-if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-WINLINK
-fi
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	WINLINK
+	fi
 }
 WINLINK
 
@@ -62,9 +108,9 @@ read -p "What is your 6 character grid square? " GRID
 GRID=${GRID^^}
 echo "You entered $GRID"
 read -p "Is this correct? y/n " ANS
-if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-GRID
-fi
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	GRID
+	fi
 }
 GRID
 
@@ -84,9 +130,9 @@ read -p "Please enter a password for your database " newDbPassword
 echo "User name - "$newUser
 echo "Password - "$newDbPassword
 read -p "Is this correct y/n " ANS
-if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-DB
-fi
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	DB
+	fi
 #give user a chance to copy down needed info
 clear;echo;echo
 echo "Database name - forum"
@@ -117,9 +163,9 @@ echo "Call Pass = $CALLPASS"
 echo "LATITUDE = $LAT"
 echo "LONGITUDE = $LON"
 read -p "Is this correct y/n " ANS
-if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-APRS
-fi
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	APRS
+	fi
 }
 APRS
 echo "CALL=$CALL" > $CONFIG
@@ -133,7 +179,214 @@ echo "LON=$LON" >> $CONFIG
 echo "CALLPASS=$CALLPASS" >> $CONFIG
 
 
-bash $MYPATH/zeroinstall.function
+else
+
+##########################
+##########################
+#Ind app selection section
+##########################
+##########################
+CALLSIGN(){
+clear;echo;echo
+read -p "What is you call sign? " CALL
+#convert call to upper case
+CALL=${CALL^^}
+echo "You entered $CALL"
+read -p "Is this correct? y/n " ANS
+	if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+	CALLSIGN
+	fi
+}
+CALLSIGN
+
+read -p "Install Hot Spot? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "HS" >> $APPS
+	HOTSPOT(){
+	clear;echo;echo
+	echo "----------------------------------------------------------------"
+	echo "Password should contain no spaces, contain only letters/numbers,"
+	echo "and be between 8-63 characters long"
+	echo "----------------------------------------------------------------"
+	read -p "Password to use with hotspot? " HSPASS
+	echo "You entered $HSPASS"
+	read -p "Is this correct? y/n " ANS
+
+	#Check password length
+	COUNT=${#HSPASS}
+		if [ $COUNT -lt 8 ]
+		then
+		echo "Password must be at least 8 characters"
+		read -n 1 -s -r -p "Press any key to continue"
+		HOTSPOT
+		fi
+
+		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+		HOTSPOT
+		fi
+	}
+	HOTSPOT
+	fi
+
+read -p "Install Hot Spot Tools? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "HST" >> $APPS
+	fi
+
+read -p "Install Pat Winlink? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "PAT" >> $APPS
+	WINLINK(){
+	clear;echo;echo
+	echo "Password is case sensitive"
+	read -p "Winlink password? " WLPASS
+	echo "You entered $WLPASS"
+	read -p "Is this correct? y/n " ANS
+		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+		WINLINK
+		fi
+	}
+	WINLINK
+
+	GRID(){
+	clear;echo;echo
+	read -p "What is your 6 character grid square? " GRID
+	GRID=${GRID^^}
+	echo "You entered $GRID"
+	read -p "Is this correct? y/n " ANS
+		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+		GRID
+		fi
+	}
+	GRID
+	fi
+
+read -p "Install Emergency Email Server? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "EES" >> $APPS
+	fi
+
+
+
+read -p "Install AX25? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "AX25" >> $APPS
+	fi
+
+
+
+read -p "Install PHPBB Forum Software? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "PHPBB" >> $APPS
+	DB(){
+	clear;echo;echo
+cat <<EOF
+The following information is needed
+to create the database that will be
+used by the PHPBB forum software.
+EOF
+	#get database user name & password
+	read -p "Please enter a user name for your database " newUser
+	read -p "Please enter a password for your database " newDbPassword
+
+	#verify info
+	echo "User name - "$newUser
+	echo "Password - "$newDbPassword
+	read -p "Is this correct y/n " ANS
+		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+		DB
+		fi
+	#give user a chance to copy down needed info
+	clear;echo;echo
+	echo "Database name - forum"
+	echo "Database user name- "$newUser
+	echo "Database password - "$newDbPassword
+	echo "hostname - localhost"
+
+cat <<EOF
+This information will be use to create the 
+database. Write down this information. You will
+need it later to complete setup of the
+forum software.
+Please press any key to continue
+EOF
+	read -n 1 -s -r -p ""
+	}
+	DB
+	fi
+
+
+read -p "Install APRS Digipeater? y/n " ANS
+	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
+	echo "APRX" >> $APPS
+	APRS(){
+	clear;echo;echo
+	echo "#############################################"
+	echo "This section pertains to your APRS digi setup"
+	echo "#############################################"
+	read -p "What is your call pass? " CALLPASS
+	read -p "What is your latitude setting? " LAT
+	read -p "What is your longitude setting? " LON
+	echo "Call Pass = $CALLPASS"
+	echo "LATITUDE = $LAT"
+	echo "LONGITUDE = $LON"
+	read -p "Is this correct y/n " ANS
+		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+		APRS
+		fi
+	}
+	APRS
+	fi
+#Mark Custom Scripts for Install
+echo "MYSCRIPTS" >> $APPS
+
+echo "CALL=$CALL" > $CONFIG
+echo "HSPASS=$HSPASS" >> $CONFIG
+echo "WLPASS=$WLPASS" >> $CONFIG
+echo "GRID=$GRID" >> $CONFIG
+echo "newUser=$newUser" >> $CONFIG
+echo "newDbPassword=$newDbPassword" >> $CONFIG
+echo "LAT=$LAT" >> $CONFIG
+echo "LON=$LON" >> $CONFIG
+echo "CALLPASS=$CALLPASS" >> $CONFIG
+
+fi 
+
+clear;echo;echo
+echo "Building KM4ACK Pi Zero Project"
+sleep 2
+
+#Update the system
+echo "##########################"
+echo "Updating the System"
+echo "##########################"
+sudo apt-get -y update && sudo apt-get -y upgrade
+
+#Install Apps
+source $APPS
+while read i ; do
+$i
+done < $APPS
+
+#install cron
+crontab $MYPATH/TEMPCRON
+
+echo;echo;echo "ALL DONE! Please reboot"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
