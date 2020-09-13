@@ -7,40 +7,22 @@ mkdir -p $TEMP
 source $CONFIG
 WHO=$(whoami)
 
-echo "Begin Install Scripts Now"
-
-FINISH(){
-rm -rf $TEMP
-rm $CONFIG
-rm $MYPATH/autohotspot
-rm $MYPATH/phpbb-install
-rm $MYPATH/TEMPCRON
-rm -rf $MYPATH/php
-rm -rf $MYPATH/misc
-}
-trap FINISH EXIT
-
-clear;echo;echo
-echo "Building KM4ACK Pi Zero Project"
-sleep 2
-
-#Update the system
-sudo apt-get -y update && sudo apt-get -y upgrade
-
 
 ##########################
 #	HotSpot
 ##########################
+HS(){
 echo "##########################"
 echo "Installing Hotspot"
 echo "##########################"
 sudo bash $MYPATH/autohotspot $HSPASS
 echo "*/5 * * * * sudo /usr/bin/autohotspotN >/dev/null 2>&1" >> $MYPATH/TEMPCRON
-
+}
 
 ##########################
 #	HotSpot Tools
 ##########################
+HST(){
 echo "##########################"
 echo "Installing Hotspot Tools"
 echo "##########################"
@@ -50,20 +32,26 @@ cd hotspot-tools/
 chmod +x disable enable hotspot-menu hotspotname knowssid manage-ip wificonnect
 rm setup
 sudo ln -sf ~/hotspot-tools/hotspot-menu /usr/local/bin/hstools
+}
+
 
 ##########################
 #	AX25
 ##########################
+AX25(){
 echo "##########################"
 echo "Installing AX25"
 echo "##########################"
 sudo apt-get install -y ax25-tools
 echo "wl2k $CALL 1200 255 7 Winlink" | sudo tee -a /etc/ax25/axports
 sudo apt-get install -y ax25-apps
+}
+
 
 ##########################
 #	Pat Winlink
 ##########################
+PAT(){
 echo "##########################"
 echo "Installing Pat Winlink"
 echo "##########################"
@@ -94,9 +82,11 @@ touch $HOME/packet.txt
 sudo chmod 644 $HOME/packet.txt
 pat rmslist -s --mode packet --force-download > $HOME/packet.txt
 echo "*/60 * * * * /usr/bin/pat rmslist -s --mode packet --force-download > $HOME/packet.txt" >> $MYPATH/TEMPCRON
+}
 ##########################
 #	EES
 ##########################
+EES(){
 echo "##########################"
 echo "Installing EES"
 echo "##########################"
@@ -122,10 +112,12 @@ cat <<EOF >> $MYPATH/TEMPCRON
 #*/1 * * * * /var/www/html/autopostreply
 #-----End EES Server Options------
 EOF
+}
 
 ##########################
 # Install Custom Scripts
 ##########################
+MYSCRIPTS(){
 echo "##########################"
 echo "Installing custom scripts"
 echo "##########################"
@@ -157,18 +149,22 @@ EOF
 sudo chown root:root $MYPATH/tempsudo
 sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi
 echo;echo "sudoers mod complete"
+}
 
 ##########################
 # phpBB Forum Install
 ##########################
+PHPBB(){
 echo "##########################"
 echo "Installing phpBB Forum"
 echo "##########################"
 sudo bash $MYPATH/phpbb-install
+}
 
 ##########################
 # APRX Install
 ##########################
+APRX(){
 echo "##########################"
 echo "Installing APRX"
 echo "##########################"
@@ -184,11 +180,8 @@ sed -i "s/00000/$CALLPASS/" $HOME/zero-project/misc/aprx.conf
 
 echo;echo "Installing new aprx.conf file"
 sudo cp $HOME/zero-project/misc/aprx.conf /etc/aprx.conf
+}
 
-#install cron
-crontab $MYPATH/TEMPCRON
-
-echo;echo;echo "ALL DONE! Please reboot"
 
 
 
