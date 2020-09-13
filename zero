@@ -363,7 +363,7 @@ echo "##########################"
 sudo apt-get -y update && sudo apt-get -y upgrade
 
 #Install Apps
-source $APPS
+source $MYPATH/zeroinstall.function
 while read i ; do
 $i
 done < $APPS
