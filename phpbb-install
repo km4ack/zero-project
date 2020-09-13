@@ -17,9 +17,6 @@ echo "script must be run as root"
 exit 0
 fi
 
-#install needed apps
-apt-get install -y php7.3 mariadb-server phpmyadmin
-
 #download PHPBB, setup dir, and mod files
 mkdir -p /temp
 cd /temp
