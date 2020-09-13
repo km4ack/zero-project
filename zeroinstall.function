@@ -18,7 +18,7 @@ echo "##########################"
 sudo bash $MYPATH/autohotspot $HSPASS
 echo "*/5 * * * * sudo /usr/bin/autohotspotN >/dev/null 2>&1" >> $MYPATH/TEMPCRON
 }
-
+HS
 ##########################
 #	HotSpot Tools
 ##########################
@@ -33,7 +33,7 @@ chmod +x disable enable hotspot-menu hotspotname knowssid manage-ip wificonnect
 rm setup
 sudo ln -sf ~/hotspot-tools/hotspot-menu /usr/local/bin/hstools
 }
-
+HST
 
 ##########################
 #	AX25
@@ -46,7 +46,7 @@ sudo apt-get install -y ax25-tools
 echo "wl2k $CALL 1200 255 7 Winlink" | sudo tee -a /etc/ax25/axports
 sudo apt-get install -y ax25-apps
 }
-
+AX25
 
 ##########################
 #	Pat Winlink
@@ -83,6 +83,7 @@ sudo chmod 644 $HOME/packet.txt
 pat rmslist -s --mode packet --force-download > $HOME/packet.txt
 echo "*/60 * * * * /usr/bin/pat rmslist -s --mode packet --force-download > $HOME/packet.txt" >> $MYPATH/TEMPCRON
 }
+PAT
 ##########################
 #	EES
 ##########################
@@ -113,7 +114,7 @@ cat <<EOF >> $MYPATH/TEMPCRON
 #-----End EES Server Options------
 EOF
 }
-
+EES
 ##########################
 # Install Custom Scripts
 ##########################
@@ -150,7 +151,7 @@ sudo chown root:root $MYPATH/tempsudo
 sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi
 echo;echo "sudoers mod complete"
 }
-
+MYSCRIPTS
 ##########################
 # phpBB Forum Install
 ##########################
@@ -160,41 +161,10 @@ echo "Installing phpBB Forum"
 echo "##########################"
 source /tmp/config
 sudo apt-get install -y php7.3 mariadb-server phpmyadmin
-#sudo bash $MYPATH/phpbb-install
-
-
-#download PHPBB, setup dir, and mod files
-mkdir -p /temp
-cd /temp
-DBDL=$(curl -s https://www.phpbb.com/downloads/ | grep .zip | head -1 | awk '{ print $2 }' | sed 's/href="//' | sed 's/">Download//')
-wget $DBDL
-VER=$(echo $DBDL | sed 's/.*phpBB//')
-DL="phpBB"$VER
-unzip $DL
-sudo mkdir -p /var/www/html/forum
-cd /temp/phpBB3
-sudo cp -r * /var/www/html/forum
-rm -rf /temp
-cd /var/www/html/forum
-sudo chmod 777 config.php
-sudo chmod 777 files
-sudo chmod 777 cache
-sudo chmod 777 store
-
-#set database name and host
-newDb='forum'
-host=localhost
-
-commands="CREATE DATABASE \`${newDb}\`;CREATE USER '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT USAGE ON *.* TO '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT ALL privileges ON \`${newDb}\`.*
-TO '${newUser}'@'${host}';FLUSH PRIVILEGES;"
-#write results to mariadb
-echo "${commands}" | sudo /usr/bin/mysql -u root
-
-
-
+sudo bash $MYPATH/phpbb-install
 
 }
-
+PHPBB
 ##########################
 # APRX Install
 ##########################
@@ -215,7 +185,7 @@ sed -i "s/00000/$CALLPASS/" $HOME/zero-project/misc/aprx.conf
 echo;echo "Installing new aprx.conf file"
 sudo cp $HOME/zero-project/misc/aprx.conf /etc/aprx.conf
 }
-
+APRX
 
 
 
