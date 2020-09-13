@@ -158,8 +158,41 @@ PHPBB(){
 echo "##########################"
 echo "Installing phpBB Forum"
 echo "##########################"
+source /tmp/config
 sudo apt-get install -y php7.3 mariadb-server phpmyadmin
-sudo bash $MYPATH/phpbb-install
+#sudo bash $MYPATH/phpbb-install
+
+
+#download PHPBB, setup dir, and mod files
+mkdir -p /temp
+cd /temp
+DBDL=$(curl -s https://www.phpbb.com/downloads/ | grep .zip | head -1 | awk '{ print $2 }' | sed 's/href="//' | sed 's/">Download//')
+wget $DBDL
+VER=$(echo $DBDL | sed 's/.*phpBB//')
+DL="phpBB"$VER
+unzip $DL
+sudo mkdir -p /var/www/html/forum
+cd /temp/phpBB3
+sudo cp -r * /var/www/html/forum
+rm -rf /temp
+cd /var/www/html/forum
+sudo chmod 777 config.php
+sudo chmod 777 files
+sudo chmod 777 cache
+sudo chmod 777 store
+
+#set database name and host
+newDb='forum'
+host=localhost
+
+commands="CREATE DATABASE \`${newDb}\`;CREATE USER '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT USAGE ON *.* TO '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT ALL privileges ON \`${newDb}\`.*
+TO '${newUser}'@'${host}';FLUSH PRIVILEGES;"
+#write results to mariadb
+echo "${commands}" | sudo /usr/bin/mysql -u root
+
+
+
+
 }
 
 ##########################
