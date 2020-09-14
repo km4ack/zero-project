@@ -5,7 +5,6 @@
 
 
 
-source /tmp/config
 
 #RUN SCRIPT AS ROOT
 WHO=$(whoami)
@@ -16,6 +15,25 @@ else
 echo "script must be run as root"
 exit 0
 fi
+
+INPUT(){
+clear;echo;echo
+echo "Recommned using call sign as user name"
+read -p "User name for database? " newUser
+read -p "Password for database? " newDbPassword
+echo "User name - $newUser"
+echo "Password - $newDbPassword"
+read -p "Is this correct? y/n " ANS
+if [ $ANS != 'y' ] && [ $ANS != 'Y' ]; then
+INPUT
+fi
+}
+INPUT
+echo "User name - $newUser"
+echo "Password - $newDbPassword"
+
+#install needed apps
+sudo apt-get install -y php7.3 mariadb-server phpmyadmin
 
 #download PHPBB, setup dir, and mod files
 mkdir -p /temp
