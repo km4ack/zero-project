@@ -36,17 +36,15 @@ echo "Password - $newDbPassword"
 sudo apt-get install -y php7.3 mariadb-server phpmyadmin
 
 #download PHPBB, setup dir, and mod files
-mkdir -p /temp
-cd /temp
+cd /tmp
 DBDL=$(curl -s https://www.phpbb.com/downloads/ | grep .zip | head -1 | awk '{ print $2 }' | sed 's/href="//' | sed 's/">Download//')
 wget $DBDL
 VER=$(echo $DBDL | sed 's/.*phpBB//')
 DL="phpBB"$VER
 unzip $DL
 mkdir -p /var/www/html/forum
-cd /temp/phpBB3
+cd /tmp/phpBB3
 cp -r * /var/www/html/forum
-rm -rf /temp
 cd /var/www/html/forum
 chmod 777 config.php
 chmod 777 files
