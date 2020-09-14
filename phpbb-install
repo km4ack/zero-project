@@ -60,6 +60,31 @@ TO '${newUser}'@'${host}';FLUSH PRIVILEGES;"
 #write results to mariadb
 echo "${commands}" | /usr/bin/mysql -u root
 
+give user a chance to copy down needed info
+	clear;echo;echo
+	echo "Database name - forum"
+	echo "Database user name- "$newUser
+	echo "Database password - "$newDbPassword
+	echo "hostname - localhost"
+
+cat <<EOF
+This information will be use to create the 
+database. Write down this information. You will
+need it later to complete setup of the
+forum software.
+Please press any key to continue
+EOF
+	read -n 1 -s -r -p ""
+cat <<EOF
+Open a web browser and navigate to 
+pi-ip-addr/forum/install to complete 
+the installation using the info that you just 
+copied. Once complete there is one more
+command that needs to be run before using
+the new forum:
+sudo bash ~/zero-project/completeforum
+EOF
+
 
 
 
