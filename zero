@@ -8,7 +8,6 @@ FINISH(){
 rm -rf $TEMP
 rm $CONFIG
 rm $MYPATH/autohotspot
-rm $MYPATH/phpbb-install
 rm $MYPATH/TEMPCRON
 rm -rf $MYPATH/php
 rm -rf $MYPATH/misc
