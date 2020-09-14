@@ -12,17 +12,32 @@ WHO=$(whoami)
 #	HotSpot
 ##########################
 HS(){
+if [ -f /usr/bin/autohotspotN ]; then
+echo "##########################"
+echo "Hotspot Already Installed"
+echo "Can't install twice"
+echo "Skipping hotspot install"
+echo "##########################"
+else
 echo "##########################"
 echo "Installing Hotspot"
 echo "##########################"
 sudo bash $MYPATH/autohotspot $HSPASS
 echo "*/5 * * * * sudo /usr/bin/autohotspotN >/dev/null 2>&1" >> $MYPATH/TEMPCRON
+fi
 }
 
 ##########################
 #	HotSpot Tools
 ##########################
 HST(){
+if [ -d $HOME/hotspot-tools ]; then
+echo "##########################"
+echo "Hot spot tools installed"
+echo "uninstalling hotspot tools"
+echo "##########################"
+rm -rf $HOME/hotspot-tools
+fi
 echo "##########################"
 echo "Installing Hotspot Tools"
 echo "##########################"
