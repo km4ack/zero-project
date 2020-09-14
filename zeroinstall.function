@@ -174,7 +174,7 @@ echo "##########################"
 echo "Installing phpBB Forum"
 echo "##########################"
 source /tmp/config
-sudo apt-get install -y php7.3 mariadb-server phpmyadmin
+
 #sudo bash $MYPATH/phpbb-install
 
 
