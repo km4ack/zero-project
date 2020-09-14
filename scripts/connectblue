@@ -11,7 +11,7 @@ sudo /usr/bin/rfcomm release /dev/rfcomm0
 #search for TNC
 echo "scanning for TNC"
 MAC=$(hcitool scan | grep Mobilinkd | awk '{print $1}')
-TNC=$(hcitool scan | grep TNC2
+TNC=$(hcitool scan | grep TNC2)
 if [ -z "$TNC" ]; then
 CONNECT="$MAC 6"
 else
