@@ -123,13 +123,13 @@ echo "Installing custom scripts"
 echo "##########################"
 cd $MYPATH/scripts
 chmod +x *
-sudo mv * /usr/local/bin/
-rm -rf $MYPATH/scripts
+sudo mv * /usr/local/bin/  > /dev/null 2>&1
+rm -rf $MYPATH/scripts  > /dev/null 2>&1
 
 #install custom PHP pages
-sudo mv $MYPATH/php/control.php /var/www/html/
-sudo mkdir -p /var/www/html/control
-sudo mv $MYPATH/php/* /var/www/html/control/
+sudo mv $MYPATH/php/control.php /var/www/html/  > /dev/null 2>&1
+sudo mkdir -p /var/www/html/control  > /dev/null 2>&1
+sudo mv $MYPATH/php/* /var/www/html/control/  > /dev/null 2>&1
 echo;echo;echo "Custom scripts installed"
 
 echo "##########################"
@@ -146,8 +146,8 @@ www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm bind /dev/rfcomm0 *
 www-data ALL = (root) NOPASSWD: /sbin/shutdown *
 EOF
 
-sudo chown root:root $MYPATH/tempsudo
-sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi
+sudo chown root:root $MYPATH/tempsudo 
+sudo mv $MYPATH/tempsudo /etc/sudoers.d/010_mobi  > /dev/null 2>&1
 echo;echo "sudoers mod complete"
 }
 
