@@ -224,7 +224,7 @@ sudo cp /etc/aprx.conf /etc/aprx.conf.org
 echo;echo "Modifying aprx.conf file with your settings"
 sed -i "s/4023.25N/$LAT/" $HOME/zero-project/misc/aprx.conf
 sed -i "s/07227.19W/$LON/" $HOME/zero-project/misc/aprx.conf
-sed -i "s/N0CALL-6/$LOWCALL-6/g" $HOME/zero-project/misc/aprx.conf
+#sed -i "s/N0CALL-6/$LOWCALL-6/g" $HOME/zero-project/misc/aprx.conf
 sed -i "s/N0CALL/$CALL/" $HOME/zero-project/misc/aprx.conf
 sed -i "s/00000/$CALLPASS/" $HOME/zero-project/misc/aprx.conf
 
