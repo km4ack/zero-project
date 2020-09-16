@@ -219,7 +219,9 @@ echo "Installing APRX"
 echo "##########################"
 LOWCALL=${call,,}
 #sudo apt-get install -y aprx
+cd $HOME
 git clone https://github.com/PhirePhly/aprx.git
+cd $HOME/aprx
 ./configure
 make
 sudo make install
