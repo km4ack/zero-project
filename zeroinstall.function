@@ -218,7 +218,11 @@ echo "##########################"
 echo "Installing APRX"
 echo "##########################"
 LOWCALL=${call,,}
-sudo apt-get install -y aprx
+#sudo apt-get install -y aprx
+git clone https://github.com/PhirePhly/aprx.git
+./configure
+make
+sudo make install
 echo;echo "Backing up original aprx.conf file"
 sudo cp /etc/aprx.conf /etc/aprx.conf.org
 echo;echo "Modifying aprx.conf file with your settings"
