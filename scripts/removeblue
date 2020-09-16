@@ -2,5 +2,6 @@
 
 echo "stopping the connection"
 sudo /usr/bin/pkill kissattach
+sudo /usr/bin/pkill aprx
 sudo /usr/bin/rfcomm release /dev/rfcomm0
 echo "disconnected from the mobilinkd TNC"
