@@ -40,6 +40,18 @@ echo '<p style="color:green">Pat is Running';
 }
 ?>
 <br>
+
+<?php
+exec("pidof aprx", $aprx);
+if(empty($aprx)) {
+
+    echo '<p style="color:red">APRS not Running';
+} else {
+echo '<p style="color:green">APRS is Running';
+}
+?>
+<br>
+
 <?php
 exec("ls /dev | grep rfcomm", $rf);
 if(empty($rf)) {
@@ -56,7 +68,11 @@ echo '<p style="color:green">Mobilinkd Connected';
 
 <br><br>
 <form action="/control/start.php">
-    <input type="submit" value="Connect Mobilinkd">
+    <input type="submit" value="Connect Mobilinkd Winlink">
+</form>
+<br>
+<form action="/control/start.php">
+    <input type="submit" value="Connect Mobilinkd APRS">
 </form>
 <br>
 <form action="/control/stop.php">
