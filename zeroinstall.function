@@ -153,6 +153,7 @@ echo "##########################"
 cat <<EOF > $MYPATH/tempsudo
 #give www-data access to needed commands to control mobilinkd TNC
 www-data ALL = (root) NOPASSWD: /usr/bin/pkill kissattach
+www-data ALL = (root) NOPASSWD: /usr/bin/pkill aprx
 www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm release /dev/rfcomm0
 www-data ALL = (root) NOPASSWD: /usr/sbin/kissattach /dev/rfcomm0 wl2k
 www-data ALL = (root) NOPASSWD: /bin/systemctl restart pat@pi
