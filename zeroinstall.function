@@ -160,6 +160,7 @@ www-data ALL = (root) NOPASSWD: /bin/systemctl restart pat@pi
 www-data ALL = (root) NOPASSWD: /usr/bin/hcitool
 www-data ALL = (root) NOPASSWD: /usr/bin/rfcomm bind /dev/rfcomm0 *
 www-data ALL = (root) NOPASSWD: /sbin/shutdown *
+www-data ALL = (root) NOPASSWD: /sbin/aprx *
 EOF
 
 sudo chown root:root $MYPATH/tempsudo 
@@ -238,6 +239,9 @@ sed -i "s/00000/$CALLPASS/" $HOME/zero-project/misc/aprx.conf
 
 echo;echo "Installing new aprx.conf file"
 sudo cp $HOME/zero-project/misc/aprx.conf /etc/aprx.conf
+
+#add www-data to dialout group
+sudo usermod -a -G dialout www-data
 }
 
 
