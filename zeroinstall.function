@@ -226,6 +226,7 @@ cd $HOME/aprx
 ./configure
 make
 sudo make install
+rm -rf $HOME/aprx
 echo;echo "Backing up original aprx.conf file"
 sudo cp /etc/aprx.conf /etc/aprx.conf.org
 echo;echo "Modifying aprx.conf file with your settings"
