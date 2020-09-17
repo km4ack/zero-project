@@ -1,0 +1,5 @@
+#!/bin/bash
+clear;echo;echo;echo "Enter call with SSID ex KM4ACK-9"
+read -p "Which station would you like to connect to? " CALL
+
+axcall wl2k $CALL
