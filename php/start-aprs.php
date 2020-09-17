@@ -5,7 +5,7 @@ session_start();
         header('LOCATION:/control/login.php'); die();
     }
 
-$output = shell_exec('/usr/local/bin/start-aprs');
+$output = shell_exec('/usr/local/bin/aprs-start');
 echo "<pre>$output</pre>";
 header('Location: /control.php?success=true');
 ?>
