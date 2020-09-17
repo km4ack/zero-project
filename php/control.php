@@ -71,7 +71,7 @@ echo '<p style="color:green">Mobilinkd Connected';
     <input type="submit" value="Connect Mobilinkd Winlink">
 </form>
 <br>
-<form action="/control/start.php">
+<form action="/control/start-aprs.php">
     <input type="submit" value="Connect Mobilinkd APRS">
 </form>
 <br>
