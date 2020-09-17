@@ -166,7 +166,7 @@ read -p "Is this correct y/n " ANS
 	APRS
 	fi
 }
-APRS
+#APRS
 echo "CALL=$CALL" > $CONFIG
 echo "HSPASS=$HSPASS" >> $CONFIG
 echo "WLPASS=$WLPASS" >> $CONFIG
@@ -318,24 +318,24 @@ clear
 read -p "Install APRS Digipeater? y/n " ANS
 	if [ $ANS = 'y' ] || [ $ANS - 'Y' ]; then
 	echo "APRX" >> $APPS
-	APRS(){
-	clear;echo;echo
-	echo "#############################################"
-	echo "This section pertains to your APRS digi setup"
-	echo "#############################################"
-	read -p "What is your call pass? " CALLPASS
-	read -p "What is your latitude setting? " LAT
-	read -p "What is your longitude setting? " LON
-	echo "Call Pass = $CALLPASS"
-	echo "LATITUDE = $LAT"
-	echo "LONGITUDE = $LON"
-	read -p "Is this correct y/n " ANS
-		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
-		APRS
-		fi
-	}
-	APRS
-	fi
+#	APRS(){
+#	clear;echo;echo
+#	echo "#############################################"
+#	echo "This section pertains to your APRS digi setup"
+#	echo "#############################################"
+#	read -p "What is your call pass? " CALLPASS
+#	read -p "What is your latitude setting? " LAT
+#	read -p "What is your longitude setting? " LON
+#	echo "Call Pass = $CALLPASS"
+#	echo "LATITUDE = $LAT"
+#	echo "LONGITUDE = $LON"
+#	read -p "Is this correct y/n " ANS
+#		if [ $ANS = 'n' ] || [ $ANS = 'N' ]; then
+#		APRS
+#		fi
+#	}
+#	APRS
+#	fi
 #Mark Custom Scripts for Install
 echo "MYSCRIPTS" >> $APPS
 
