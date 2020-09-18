@@ -1,0 +1,92 @@
+#!/bin/bash
+
+#Script to install PHPBB forums
+#20200305 km4ack
+
+
+
+
+#RUN SCRIPT AS ROOT
+WHO=$(whoami)
+if [ $WHO = 'root' ]
+then
+echo
+else
+echo "script must be run as root"
+exit 0
+fi
+
+INPUT(){
+clear;echo;echo
+echo "Recommned using call sign as user name"
+read -p "User name for database? " newUser
+read -p "Password for database? " newDbPassword
+echo "User name - $newUser"
+echo "Password - $newDbPassword"
+read -p "Is this correct? y/n " ANS
+if [ $ANS != 'y' ] && [ $ANS != 'Y' ]; then
+INPUT
+fi
+}
+INPUT
+echo "User name - $newUser"
+echo "Password - $newDbPassword"
+
+#install needed apps
+sudo apt-get install -y php7.3 mariadb-server phpmyadmin
+
+#download PHPBB, setup dir, and mod files
+cd /tmp
+DBDL=$(curl -s https://www.phpbb.com/downloads/ | grep .zip | head -1 | awk '{ print $2 }' | sed 's/href="//' | sed 's/">Download//')
+wget $DBDL
+VER=$(echo $DBDL | sed 's/.*phpBB//')
+DL="phpBB"$VER
+unzip $DL
+mkdir -p /var/www/html/forum
+cd /tmp/phpBB3
+cp -r * /var/www/html/forum
+cd /var/www/html/forum
+chmod 777 config.php
+chmod 777 files
+chmod 777 cache
+chmod 777 store
+
+#set database name and host
+newDb='forum'
+host=localhost
+
+commands="CREATE DATABASE \`${newDb}\`;CREATE USER '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT USAGE ON *.* TO '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT ALL privileges ON \`${newDb}\`.*
+TO '${newUser}'@'${host}';FLUSH PRIVILEGES;"
+#write results to mariadb
+echo "${commands}" | /usr/bin/mysql -u root
+
+give user a chance to copy down needed info
+	clear;echo;echo
+	echo "Database name - forum"
+	echo "Database user name- "$newUser
+	echo "Database password - "$newDbPassword
+	echo "hostname - localhost"
+
+cat <<EOF
+This information will be use to create the 
+database. Write down this information. You will
+need it later to complete setup of the
+forum software.
+Please press any key to continue
+EOF
+	read -n 1 -s -r -p ""
+cat <<EOF
+Open a web browser and navigate to 
+pi-ip-addr/forum/install to complete 
+the installation using the info that you just 
+copied. Once complete there is one more
+command that needs to be run before using
+the new forum:
+sudo bash ~/zero-project/completeforum
+EOF
+
+
+
+
+
+

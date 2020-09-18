@@ -1,0 +1,6 @@
+
+
+mv /var/www/html/forum/install /var/www/html/forum/install.org
+chmod 644 /var/www/html/$newDb/config.php
+
+rm /home/pi/zero-project/completeforum

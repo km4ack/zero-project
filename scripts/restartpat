@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#20200805 km4ack
+#script to restart pat winlink
+#script called from php page
+
+
+sudo systemctl restart pat@pi
