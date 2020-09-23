@@ -1,4 +1,7 @@
-version=1.0.0rc1
+version=1.0.0rc2
+
+1.0.0rc2
+	Make Pat Link dynamic - Thanks Rich/KB3YBE for the code!
 
 1.0.0rc1
 	initial commit of main script
