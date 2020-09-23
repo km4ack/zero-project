@@ -79,7 +79,12 @@ echo '<p style="color:green">Mobilinkd Connected';
     <input type="submit" value="Disconnect Mobilinkd">
 </form>
 <br>
-<form action="http://10.10.10.10:5050">
+<?php
+// Create variable for server IP address
+$pat_ip = $_SERVER['SERVER_ADDR'];
+?>
+
+<form action="http://<?php echo $pat_ip; ?>:5050">
     <input type="submit" value="Pat Winlink">
 </form>
 <br>
